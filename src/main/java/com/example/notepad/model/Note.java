@@ -24,7 +24,7 @@ public class Note {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "note_seq")
   private Long id;
 
-  private String text;
+  private String description;
 
   @Column(name = "added_at")
   private LocalDateTime addedAt;

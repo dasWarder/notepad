@@ -17,6 +17,7 @@
         <java.version>11</java.version>
         <h2.version>1.4.200</h2.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
+        <liquibase.version>3.10.3</liquibase.version>
     </properties>
     <dependencies>
 
@@ -33,6 +34,7 @@
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
+            <version>${liquibase.version}</version>
         </dependency>
 
         <dependency>
