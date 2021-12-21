@@ -1,4 +1,18 @@
 <div class="main-header">
-  <fa-icon [icon]="bar"></fa-icon>
-  <a routerLink="/home" routerLinkActive="active"><fa-icon [icon]="home"></fa-icon></a>
+  <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+    <a class="dropdown-button" id="dropdownManual"
+       (click)="isBarOpen? myDrop.close() : myDrop.open(); isBarOpen = !isBarOpen">
+      <fa-icon [icon]="bar"></fa-icon>
+      <span ngbDropdownAnchor hidden></span>
+    </a>
+    <div ngbDropdownMenu aria-labelledby="dropdownManual" class="menu-navbar">
+      <button ngbDropdownItem><a routerLink="/today" routerLinkActive="active"><fa-icon [icon]="todayCalendar"></fa-icon>Today</a></button>
+      <button ngbDropdownItem><a><fa-icon [icon]="furtherCalendar"></fa-icon>Planned</a></button>
+      <button ngbDropdownItem><a><fa-icon [icon]="tags"></fa-icon>Tags</a></button>
+    </div>
+  </div>
+
+  <a routerLink="/home" routerLinkActive="active">
+    <fa-icon [icon]="home"></fa-icon>
+  </a>
 </div>

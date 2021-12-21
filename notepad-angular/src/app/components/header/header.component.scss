@@ -18,4 +18,35 @@
   fa-icon:hover {
     background-color: rgba(255, 255, 255, 0.5);
   }
+
+  a {
+    color: black;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
 }
+
+.menu-navbar  {
+  margin: 40px 10px 10px 0px;
+
+  fa-icon {
+    color: green;
+    font-size: 1.3rem;
+    margin: 15px 10px;
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
+
+  fa-icon:hover {
+    background-color: inherit;
+  }
+
+  .dropdown-item {
+    padding: 0px;
+    margin: 5px auto;
+  }
+}
+
+

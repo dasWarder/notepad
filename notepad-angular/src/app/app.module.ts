@@ -8,12 +8,14 @@ import {FormsModule} from "@angular/forms";
 import { HeaderComponent } from './components/header/header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MainPageComponent } from './components/main-page/main-page.component';
+import { TodayBarComponent } from './components/today-bar/today-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    MainPageComponent
+    MainPageComponent,
+    TodayBarComponent
   ],
   imports: [
     BrowserModule,
