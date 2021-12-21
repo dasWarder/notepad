@@ -1,8 +1,38 @@
 <div class="container col-md-6 offset-md-3 p-3">
-  <hr>
+  <h4 class="mb-5 px-4">{{ todayDate | date:'fullDate'}}</h4>
+  <div *ngIf="notes.length != 0; else noNotes">
+    <div class="note-card" *ngFor="let note of notes">
+      <p class="text-left"><fa-icon [icon]="noteIcon"></fa-icon>{{ note.description }}</p>
+      <ul>
+        <li>
+          <div>
+            <span class="tags" *ngFor="let tag of note.tags">
+              <small>
+                <a routerLink="#">
+                  <fa-icon [icon]="tagIcon"></fa-icon>{{ tag }}
+                </a>
+              </small>
+            </span>
+            <span>
+              <fa-icon [icon]="alarmClockIcon"></fa-icon>
+            </span>
+          </div>
+        </li>
+      </ul>
+      <hr>
+    </div>
+  </div>
   <div class="add-section">
     <a routerLink="/home" routerLinkActive="active">
-      <fa-icon [icon]="add"></fa-icon>
+      <fa-icon [icon]="addIcon"></fa-icon>
       Create a new note</a>
   </div>
 </div>
+
+<ng-template #noNotes>
+  <div class="px-5 text-center">
+    <h5 style="color: gray">There is no notes for today yet</h5>
+    <fa-icon style="font-size: 100px; margin: 10px 10px; padding: 0px" [icon]="emptyIcon"></fa-icon>
+  </div>
+  <hr>
+</ng-template>

@@ -10,20 +10,52 @@ fa-icon {
   margin: 15px;
 
   a {
+    color: black;
     width: 100%;
     display: inline-block;
   }
-}
 
-
-a:hover {
+  a:hover {
     text-decoration: none;
+    color: #cc5500;
+
     fa-icon {
       border-radius: 50px;
-      background-color: rgba(200, 0, 0, 0.5);
+      background-color: rgba(200, 0, 0, 0.6);
       color: white;
       margin: 10px;
       padding-bottom: 5px;
     }
+  }
+}
+
+
+ul li {
+  list-style: none;
+
+  .tags {
+    margin: 20px 0px;
+    color: #aaaaaa;
+    text-decoration: gray;
+
+    fa-icon {
+      color: gray;
+      margin: 0px 0px;
+      font-size: 12px;
+    }
+
+    a {
+      color: gray;
+    }
+  }
+}
+
+
+p {
+  margin: 10px auto 0px;
+}
+
+.note-card {
+  margin: 15px;
 }
 

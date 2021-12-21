@@ -1,7 +1,7 @@
 <div class="main-header">
   <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
     <a class="dropdown-button" id="dropdownManual"
-       (click)="isBarOpen? myDrop.close() : myDrop.open(); isBarOpen = !isBarOpen">
+       (click)="isBarOpen? myDrop.close() : myDrop.open(); isBarOpen = !isBarOpen" routerLink="#">
       <fa-icon [icon]="bar"></fa-icon>
       <span ngbDropdownAnchor hidden></span>
     </a>

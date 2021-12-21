@@ -78,4 +78,15 @@ public class NoteController {
 
     return ResponseEntity.ok(response);
   }
+
+  @GetMapping("/note")
+  public ResponseEntity<List<NoteResponse>> getTodayNotes() {
+
+    List<NoteResponse> response =
+            noteService.getTodayNotes().stream()
+                    .map(noteMapper::noteToNoteResponse)
+                    .collect(Collectors.toList());
+
+    return ResponseEntity.ok(response);
+  }
 }

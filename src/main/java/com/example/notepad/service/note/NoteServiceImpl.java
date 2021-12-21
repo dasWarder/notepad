@@ -4,15 +4,13 @@ import com.example.notepad.dao.NoteRepository;
 import com.example.notepad.dao.TagRepository;
 import com.example.notepad.model.Note;
 import com.example.notepad.service.exception.NoteNotFoundException;
+import com.example.notepad.service.util.DateTimeUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -78,33 +76,34 @@ public class NoteServiceImpl implements NoteService {
   @Override
   public List<Note> getNotes(String actualFor, Set<String> tagNames) {
 
-    List<Note> response = new ArrayList<>();
-
     if (Objects.nonNull(actualFor)) {
 
       log.info("In NoteServiceImpl.getNotes - Get notes by actual for = {}", actualFor);
 
       LocalDate parsedDate = LocalDate.parse(actualFor);
-      List<Note> notes =
-          noteRepository.getNotesByActualFor(parsedDate.atStartOfDay()).stream()
-              .collect(Collectors.toList());
-      response.addAll(notes);
+      return noteRepository.getNotesByActualFor(parsedDate.atStartOfDay()).stream()
+          .collect(Collectors.toList());
     }
 
     if (Objects.nonNull(tagNames)) {
 
       log.info("In NoteServiceImpl.getNotes - Get notes by tags");
-      List<Note> notesByTag = this.getNotesByTags(tagNames).stream().collect(Collectors.toList());
-      response.addAll(notesByTag);
+      return this.getNotesByTags(tagNames).stream().collect(Collectors.toList());
     }
 
-    if (Objects.isNull(actualFor) && Objects.isNull(tagNames)) {
+    log.info("In NoteServiceImpl.getNotes - Get notes");
 
-      log.info("In NoteServiceImpl.getNotes - Get notes");
-      return noteRepository.findAll().stream().collect(Collectors.toList());
-    }
+    return noteRepository.findAll().stream().collect(Collectors.toList());
+  }
 
-    return response;
+  @Override
+  public List<Note> getTodayNotes() {
+
+    log.info("In NoteServiceImpl.getTodayNotes - Get today notes");
+
+    return noteRepository.findAll().stream()
+        .filter(n -> DateTimeUtil.noteDateDueToday(n.getActualFor()))
+        .collect(Collectors.toList());
   }
 
   private List<Note> getNotesByTags(Set<String> tagNames) {
