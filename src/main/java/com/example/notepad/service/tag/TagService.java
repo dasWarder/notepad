@@ -1,9 +1,11 @@
-package com.example.notepad.service;
+package com.example.notepad.service.tag;
 
 import com.example.notepad.model.Tag;
 import com.example.notepad.service.exception.TagNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.Set;
 
 public interface TagService {
 
@@ -13,7 +15,7 @@ public interface TagService {
 
     Tag getTagById(Long id) throws TagNotFoundException;
 
-    Tag getTabByTagName(String tagName) throws TagNotFoundException;
+    Tag getTagByTagName(String tagName) throws TagNotFoundException;
 
     void deleteTagById(Long id);
 

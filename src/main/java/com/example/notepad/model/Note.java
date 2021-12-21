@@ -34,7 +34,7 @@ public class Note {
 
   private boolean reminder;
 
-  @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+  @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH })
   @JoinTable(
       name = "note_tag",
       joinColumns = {@JoinColumn(name = "note_id")},

@@ -1,4 +1,4 @@
-package com.example.notepad.service;
+package com.example.notepad.service.tag;
 
 import com.example.notepad.dao.TagRepository;
 import com.example.notepad.model.Tag;
@@ -8,6 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -45,7 +48,7 @@ public class TagServiceImpl implements TagService {
   }
 
   @Override
-  public Tag getTabByTagName(String tagName) throws TagNotFoundException {
+  public Tag getTagByTagName(String tagName) throws TagNotFoundException {
 
     log.info("In TagServiceImpl.getTagByTagName - Get tag by tagName = {}", tagName);
 
