@@ -6,6 +6,8 @@ import {faTag} from "@fortawesome/free-solid-svg-icons/faTag";
 import {faThumbtack} from "@fortawesome/free-solid-svg-icons/faThumbtack";
 import {faClock} from "@fortawesome/free-solid-svg-icons/faClock";
 import {faStickyNote} from "@fortawesome/free-solid-svg-icons/faStickyNote";
+import {faEdit} from "@fortawesome/free-solid-svg-icons/faEdit";
+import {faTrash} from "@fortawesome/free-solid-svg-icons/faTrash";
 
 @Component({
   selector: 'app-today-bar',
@@ -14,6 +16,8 @@ import {faStickyNote} from "@fortawesome/free-solid-svg-icons/faStickyNote";
 })
 export class TodayBarComponent implements OnInit {
 
+  editIcon = faEdit;
+  deleteIcon = faTrash;
   alarmClockIcon = faClock;
   noteIcon = faThumbtack;
   addIcon = faPlus;
@@ -21,6 +25,7 @@ export class TodayBarComponent implements OnInit {
   emptyIcon = faStickyNote;
   notes: Array<Note> = [];
   todayDate: Date = new Date();
+
 
   constructor(private noteService: NoteService) { }
 

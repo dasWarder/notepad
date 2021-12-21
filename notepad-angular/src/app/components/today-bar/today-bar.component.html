@@ -2,19 +2,33 @@
   <h4 class="mb-5 px-4">{{ todayDate | date:'fullDate'}}</h4>
   <div *ngIf="notes.length != 0; else noNotes">
     <div class="note-card" *ngFor="let note of notes">
-      <p class="text-left"><fa-icon [icon]="noteIcon"></fa-icon>{{ note.description }}</p>
+      <div class="row">
+        <div class="col mr-5">
+        <p class="text-left">
+          <fa-icon [icon]="noteIcon"></fa-icon>
+          {{ note.description }}
+        </p>
+        </div>
+        <div class="col ml-5 text-right">
+          <div class="icon-panel">
+              <a href="#"><fa-icon [icon]="editIcon"></fa-icon></a>
+              <a href="#"><fa-icon [icon]="deleteIcon"></fa-icon></a>
+          </div>
+        </div>
+      </div>
       <ul>
         <li>
           <div>
             <span class="tags" *ngFor="let tag of note.tags">
               <small>
                 <a routerLink="#">
-                  <fa-icon [icon]="tagIcon"></fa-icon>{{ tag }}
+                  <fa-icon [icon]="tagIcon"></fa-icon>
+                  {{ tag }}
                 </a>
               </small>
             </span>
-            <span>
-              <fa-icon [icon]="alarmClockIcon"></fa-icon>
+            <span class="reminder">
+              <fa-icon [style.color]="note.reminder? 'red' : 'gray'" [icon]="alarmClockIcon"></fa-icon>
             </span>
           </div>
         </li>

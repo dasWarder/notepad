@@ -57,5 +57,28 @@ p {
 
 .note-card {
   margin: 15px;
+
+  .reminder {
+    position: absolute;
+    text-align: right;
+    right: 3%;
+  }
+
+  a {
+    margin: 5px;
+  }
 }
 
+
+.icon-panel {
+
+  fa-icon {
+    margin: 2px auto;
+    color: rgba(100, 100, 100, 0.5);
+  }
+
+  fa-icon:hover {
+    color: rgba(250, 50, 50, 1);
+    background-color: rgba(50, 50, 50, 0.2);
+  }
+}
