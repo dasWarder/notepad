@@ -105,6 +105,19 @@ p {
     width: 50%;
   }
 
+  .tags-section:hover {
+    background-color: rgba(150, 150, 150, 0.6);
+
+    small {
+      color: darkred;
+    }
+  }
+
+  fa-icon:hover {
+    color: rgba(250, 50, 50, 1);
+    background-color: rgba(50, 50, 50, 0.2);
+  }
+
   #reminder-field {
 
     label {
