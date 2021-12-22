@@ -8,6 +8,7 @@ import {faClock} from "@fortawesome/free-solid-svg-icons/faClock";
 import {faStickyNote} from "@fortawesome/free-solid-svg-icons/faStickyNote";
 import {faEdit} from "@fortawesome/free-solid-svg-icons/faEdit";
 import {faTrash} from "@fortawesome/free-solid-svg-icons/faTrash";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-today-bar',
@@ -33,23 +34,33 @@ export class TodayBarComponent implements OnInit {
   tag: string = '';
 
 
-  constructor(private noteService: NoteService) {
+  constructor(private noteService: NoteService, private router: Router) {
   }
 
   ngOnInit(): void {
     this.note.actualFor = new Date().toISOString().slice(0, 10);
-    this.noteService.getTodayNotes().subscribe({
-      next: value => this.notes = value,
-      error: err => console.error(err)
-    });
+    this.getTodayNotes();
   }
 
   saveNote = () => {
     this.noteService.saveNote(this.note).subscribe({
-      next: value => console.log(`In TodayBarComponent.saveNote - A note = ${value} was created`),
+      next: value => {
+        console.log(`In TodayBarComponent.saveNote - A note = ${value} was created`);
+        this.getTodayNotes();
+        this.resetNote()
+      },
       error: err => console.error(`In TodayBarComponent.saveNote - An exception occurred`)
     });
-    console.log(this.note);
+  }
+
+  deleteNote = (id: number) => {
+    this.noteService.deleteNoteById(id).subscribe({
+      next: value => {
+        console.log(`In TodayBarComponent.deleteNote - A note were deleted by id = ${id}`);
+        this.getTodayNotes()
+      },
+      error: err => console.error(`In TodayBarComponent.deleteNote - An exception occurred ${err.message}`)
+    });
   }
 
   deleteTag = (tag: string) => {
@@ -90,5 +101,18 @@ export class TodayBarComponent implements OnInit {
   private isTagInArray = (tag: string): boolean => {
     let numberOfDuplicates = this.note.tags.filter(t => t === tag).length;
     return numberOfDuplicates > 0;
+  }
+
+  private getTodayNotes = () => {
+    this.noteService.getTodayNotes().subscribe({
+      next: value => this.notes = value,
+      error: err => console.error(err)
+    });
+  }
+
+  private resetNote = () => {
+    this.note = new Note();
+    this.iterator = 0;
+    this.note.actualFor = new Date().toISOString().slice(0, 10);
   }
 }

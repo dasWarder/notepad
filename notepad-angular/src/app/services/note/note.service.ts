@@ -19,4 +19,12 @@ export class NoteService {
   saveNote(note: Note) {
     return this.httpClient.post<Observable<Note>>(`${this.baseUrl}`, note);
   }
+
+  deleteNoteById(id: number) {
+    return this.httpClient.delete<Observable<void>>(`${this.baseUrl}/${id}`);
+  }
+
+  getNoteById(id: number) {
+    return this.httpClient.get<Observable<Note>>(`${this.baseUrl}/${id}`);
+  }
 }
