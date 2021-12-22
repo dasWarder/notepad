@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Note} from "../../classes/note";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -13,5 +14,9 @@ export class NoteService {
 
   getTodayNotes() {
     return this.httpClient.get<Array<Note>>(`${this.baseUrl}/note`);
+  }
+
+  saveNote(note: Note) {
+    return this.httpClient.post<Observable<Note>>(`${this.baseUrl}`, note);
   }
 }

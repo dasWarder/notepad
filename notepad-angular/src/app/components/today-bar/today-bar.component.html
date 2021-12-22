@@ -4,15 +4,19 @@
     <div class="note-card" *ngFor="let note of notes">
       <div class="row">
         <div class="col mr-5">
-        <p class="text-left">
-          <fa-icon [icon]="noteIcon"></fa-icon>
-          {{ note.description }}
-        </p>
+          <p class="text-left">
+            <fa-icon [icon]="noteIcon"></fa-icon>
+            {{ note.description }}
+          </p>
         </div>
         <div class="col ml-5 text-right">
           <div class="icon-panel">
-              <a href="#"><fa-icon [icon]="editIcon"></fa-icon></a>
-              <a href="#"><fa-icon [icon]="deleteIcon"></fa-icon></a>
+            <a href="#">
+              <fa-icon [icon]="editIcon"></fa-icon>
+            </a>
+            <a href="#">
+              <fa-icon [icon]="deleteIcon"></fa-icon>
+            </a>
           </div>
         </div>
       </div>
@@ -36,12 +40,50 @@
       <hr>
     </div>
   </div>
-  <div class="add-section">
-    <a routerLink="/home" routerLinkActive="active">
+  <div class="add-section" *ngIf="!isCreatePanelOpen; else submitForm">
+    <a (click)="isCreatePanelOpen = !isCreatePanelOpen">
       <fa-icon [icon]="addIcon"></fa-icon>
       Create a new note</a>
   </div>
 </div>
+
+<ng-template #submitForm>
+  <div class="submit-form">
+    <form (submit)="saveNote()">
+      <div class="form-group">
+        <textarea [(ngModel)]="note.description" name="description" [value]="note.description" type="text"
+                  class="form-control" id="exampleInputDescription" aria-describedby="descriptionHelper"
+                  placeholder="Enter description, i.e. buy some bread"></textarea>
+      </div>
+      <!--      <div class="form-group">-->
+      <!--        <input type="date" [(ngModel)]="note.actualFor" name="actualFor" [value]="note.actualFor" class="form-control"-->
+      <!--               id="actualFor" aria-describedby="actualForHelper" placeholder="Note deadline">-->
+      <!--      </div>-->
+      <div id="reminder-field" class="form-group">
+        <label for="reminder">Remind me</label>
+        <input [(ngModel)]="note.reminder" [value]="note.reminder" name="reminder" type="checkbox" id="reminder">
+      </div>
+      <div class="form-group">
+        <input [(ngModel)]="tag" [value]="note.tags[iterator]" type="text" class="form-control" name="tag" id="tags"
+               aria-describedby="tagsHelper" placeholder="Tag">
+        <a (click)="addTag()">
+          <fa-icon [icon]="addIcon"></fa-icon>
+        </a>
+      </div>
+      <div class="tags-section" *ngFor="let tag of note.tags">
+        <a (click)="deleteTag(tag)"><small>{{ tag }}</small></a>
+      </div>
+      <div class="btn-group-sm pl-1">
+        <div class="col">
+          <button type="submit" class="btn btn-danger mx-2 text-center">Add note</button>
+          <button type="button" class="btn btn-info text-center" (click)="isCreatePanelOpen = !isCreatePanelOpen">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
 
 <ng-template #noNotes>
   <div class="px-5 text-center">

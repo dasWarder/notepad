@@ -3,11 +3,11 @@
 export class Note {
 
   id!: number;
-  description!: string;
+  description: string = "";
   addedAt!: Date;
-  actualFor!: Date;
-  reminder!: boolean;
-  tags!: Array<String>;
+  actualFor!: string;
+  reminder: boolean = false;
+  tags: Array<string> = [];
 
   constructor() {
   }
