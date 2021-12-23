@@ -11,13 +11,15 @@ import {MainPageComponent} from './components/main-page/main-page.component';
 import {TodayBarComponent} from './components/today-bar/today-bar.component';
 import {HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
+import { TagsComponent } from './components/tags/tags.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     MainPageComponent,
-    TodayBarComponent
+    TodayBarComponent,
+    TagsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,53 @@
+<div class="container col-md-6 offset-md-3 p-3">
+  <h2 class="my-2 text-center">Search for by tag: <i>{{ tag }}</i></h2>
+  <div *ngIf="notes.length != 0; else noNotes">
+    <div class="note-card" *ngFor="let note of notes" [class]="checkActivityOfActualDate(note.actualFor)? 'green' : 'red'">
+      <div class="row">
+        <div class="col mr-5">
+          <p class="text-left">
+            <fa-icon [icon]="noteIcon"></fa-icon>
+            {{ note.description }}
+          </p>
+        </div>
+        <div class="col ml-5 text-right">
+          <div class="icon-panel">
+            <a (click)="deleteNote(note.id)">
+              <fa-icon [icon]="deleteIcon"></fa-icon>
+            </a>
+          </div>
+        </div>
+      </div>
+      <ul>
+        <li>
+          <div>
+              <span class="tags" *ngFor="let tag of note.tags">
+                <small>
+                    <fa-icon [icon]="tagIcon"></fa-icon>
+                    {{ tag }}
+                </small>
+              </span>
+            <span class="reminder">
+                <fa-icon [style.color]="note.reminder? 'red' : 'gray'" [icon]="alarmClockIcon"></fa-icon>
+              </span>
+          </div>
+          <div class="date-section">
+            <small class="offset-md-0">
+              <i>Created on: {{ note.addedAt }}</i>
+            </small>
+            <small class="offset-md-7">
+              <i>Expiry on: {{ note.actualFor }}</i>
+            </small>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<ng-template #noNotes>
+  <div class="px-5 text-center my-4">
+    <h6 style="color: gray">There is no notes with this tag yet</h6>
+    <fa-icon style="font-size: 100px; margin: 10px 10px; padding: 0px; color: #cc5500" [icon]="emptyIcon"></fa-icon>
+  </div>
+  <hr>
+</ng-template>

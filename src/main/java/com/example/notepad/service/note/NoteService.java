@@ -18,7 +18,7 @@ public interface NoteService {
 
     List<Note> getReminderNotes();
 
-    List<Note> getNotes(String actualFor, Set<String> tagNames);
+    List<Note> getNotes(String actualFor, String tagName);
 
     List<Note> getTodayNotes();
 }

@@ -1,29 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {faPlus} from "@fortawesome/free-solid-svg-icons/faPlus";
 import {NoteService} from "../../services/note/note.service";
 import {Note} from "../../classes/note";
-import {faTag} from "@fortawesome/free-solid-svg-icons/faTag";
-import {faThumbtack} from "@fortawesome/free-solid-svg-icons/faThumbtack";
-import {faClock} from "@fortawesome/free-solid-svg-icons/faClock";
-import {faStickyNote} from "@fortawesome/free-solid-svg-icons/faStickyNote";
-import {faEdit} from "@fortawesome/free-solid-svg-icons/faEdit";
-import {faTrash} from "@fortawesome/free-solid-svg-icons/faTrash";
 import {Router} from "@angular/router";
+import {BaseNoteComponentImpl} from "../../classes/baseNoteComponentImpl";
 
 @Component({
   selector: 'app-today-bar',
   templateUrl: './today-bar.component.html',
   styleUrls: ['./today-bar.component.scss']
 })
-export class TodayBarComponent implements OnInit {
-
-  editIcon = faEdit;
-  deleteIcon = faTrash;
-  alarmClockIcon = faClock;
-  noteIcon = faThumbtack;
-  addIcon = faPlus;
-  tagIcon = faTag;
-  emptyIcon = faStickyNote;
+export class TodayBarComponent extends BaseNoteComponentImpl implements OnInit {
 
   notes: Array<Note> = [];
   todayDate: Date = new Date();
@@ -34,32 +20,35 @@ export class TodayBarComponent implements OnInit {
   tag: string = '';
 
 
-  constructor(private noteService: NoteService, private router: Router) {
+  constructor(noteService: NoteService, router: Router) {
+    super(noteService, router);
   }
 
   ngOnInit(): void {
     this.note.actualFor = new Date().toISOString().slice(0, 10);
-    this.getTodayNotes();
+    this.getNotes();
   }
 
   saveNote = () => {
     this.noteService.saveNote(this.note).subscribe({
       next: value => {
         console.log(`In TodayBarComponent.saveNote - A note = ${value} was created`);
-        this.getTodayNotes();
-        this.resetNote()
+        this.getNotes();
+        this.resetNote();
       },
-      error: err => console.error(`In TodayBarComponent.saveNote - An exception occurred`)
+      error: err => console.error(`In TodayBarComponent.saveNote - An exception occurred ${err.message}`)
     });
   }
 
-  deleteNote = (id: number) => {
-    this.noteService.deleteNoteById(id).subscribe({
-      next: value => {
-        console.log(`In TodayBarComponent.deleteNote - A note were deleted by id = ${id}`);
-        this.getTodayNotes()
-      },
-      error: err => console.error(`In TodayBarComponent.deleteNote - An exception occurred ${err.message}`)
+  override deleteNoteById = (id: number) : void => {
+    super.deleteNoteById(id);
+    this.getNotes();
+  }
+
+  getNotes = (): void => {
+    this.noteService.getTodayNotes().subscribe({
+      next: value => this.notes = value,
+      error: err => console.error(err)
     });
   }
 
@@ -79,6 +68,10 @@ export class TodayBarComponent implements OnInit {
       this.iterator++;
       this.tag = "";
     }
+  }
+
+  override redirect = (tag: string): void => {
+    super.redirect(`tags`, tag);
   }
 
   private rebaseArray = (idx: number): void => {
@@ -101,13 +94,6 @@ export class TodayBarComponent implements OnInit {
   private isTagInArray = (tag: string): boolean => {
     let numberOfDuplicates = this.note.tags.filter(t => t === tag).length;
     return numberOfDuplicates > 0;
-  }
-
-  private getTodayNotes = () => {
-    this.noteService.getTodayNotes().subscribe({
-      next: value => this.notes = value,
-      error: err => console.error(err)
-    });
   }
 
   private resetNote = () => {

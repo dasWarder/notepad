@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Note} from "../../classes/note";
 import {Observable} from "rxjs";
 
@@ -17,14 +17,24 @@ export class NoteService {
   }
 
   saveNote(note: Note) {
-    return this.httpClient.post<Observable<Note>>(`${this.baseUrl}`, note);
+    return this.httpClient.post<Note>(this.baseUrl, note);
   }
 
   deleteNoteById(id: number) {
-    return this.httpClient.delete<Observable<void>>(`${this.baseUrl}/${id}`);
+    return this.httpClient.delete<void>(`${this.baseUrl}/${id}`);
   }
 
   getNoteById(id: number) {
-    return this.httpClient.get<Observable<Note>>(`${this.baseUrl}/${id}`);
+    return this.httpClient.get<Note>(`${this.baseUrl}/${id}`);
+  }
+
+  getNotesByTag(tag: string) {
+    return this.httpClient.get<Array<Note>>(this.baseUrl, {
+      params: { 'tag': tag }
+    });
+  }
+
+  updateNoteById(id: number, note: Note) {
+    return this.httpClient.put(`${this.baseUrl}/${id}`, note);
   }
 }

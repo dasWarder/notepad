@@ -3,6 +3,7 @@ package com.example.notepad.service.note;
 import com.example.notepad.dao.NoteRepository;
 import com.example.notepad.dao.TagRepository;
 import com.example.notepad.model.Note;
+import com.example.notepad.model.Tag;
 import com.example.notepad.service.exception.NoteNotFoundException;
 import com.example.notepad.service.util.DateTimeUtil;
 import lombok.RequiredArgsConstructor;
@@ -74,7 +75,7 @@ public class NoteServiceImpl implements NoteService {
   }
 
   @Override
-  public List<Note> getNotes(String actualFor, Set<String> tagNames) {
+  public List<Note> getNotes(String actualFor, String tagName) {
 
     if (Objects.nonNull(actualFor)) {
 
@@ -85,10 +86,10 @@ public class NoteServiceImpl implements NoteService {
           .collect(Collectors.toList());
     }
 
-    if (Objects.nonNull(tagNames)) {
+    if (Objects.nonNull(tagName)) {
 
-      log.info("In NoteServiceImpl.getNotes - Get notes by tags");
-      return this.getNotesByTags(tagNames).stream().collect(Collectors.toList());
+      log.info("In NoteServiceImpl.getNotes - Get notes by tag = {}", tagName);
+      return this.getNotesByTag(tagName).stream().collect(Collectors.toList());
     }
 
     log.info("In NoteServiceImpl.getNotes - Get notes");
@@ -106,14 +107,9 @@ public class NoteServiceImpl implements NoteService {
         .collect(Collectors.toList());
   }
 
-  private List<Note> getNotesByTags(Set<String> tagNames) {
+  private List<Note> getNotesByTag(String tagName) {
 
-    List<Note> notes = new ArrayList<>();
-
-    tagNames.stream()
-        .map(t -> tagRepository.getTagByTagName(t).orElse(null))
-        .forEach(tag -> notes.addAll(noteRepository.getNotesByTagsContains(tag)));
-
-    return notes;
+    Tag tag = tagRepository.getTagByTagName(tagName).orElse(null);
+    return noteRepository.getNotesByTagsContains(tag);
   }
 }
