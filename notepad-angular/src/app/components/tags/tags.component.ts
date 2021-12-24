@@ -45,8 +45,10 @@ export class TagsComponent extends BaseNoteComponentImpl implements OnInit {
 
   checkActivityOfActualDate = (actualFor: string) : boolean => {
 
-    let today = new Date(this.todayDate).getDate();
-    let active = new Date(actualFor).getDate();
+    let today = new Date(this.todayDate);
+    console.log('TODAY: ' + today);
+
+    let active = new Date(actualFor);
 
     return today < active;
   }

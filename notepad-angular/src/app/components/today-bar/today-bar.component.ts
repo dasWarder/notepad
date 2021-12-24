@@ -3,6 +3,7 @@ import {NoteService} from "../../services/note/note.service";
 import {Note} from "../../classes/note";
 import {Router} from "@angular/router";
 import {BaseNoteComponentImpl} from "../../classes/baseNoteComponentImpl";
+import {NgbPopoverConfig} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-today-bar',
@@ -20,8 +21,10 @@ export class TodayBarComponent extends BaseNoteComponentImpl implements OnInit {
   tag: string = '';
 
 
-  constructor(noteService: NoteService, router: Router) {
+  constructor(noteService: NoteService, router: Router, private popoverConfig: NgbPopoverConfig ) {
     super(noteService, router);
+    popoverConfig.placement = 'left';
+    popoverConfig.triggers = 'hover';
   }
 
   ngOnInit(): void {
@@ -74,7 +77,7 @@ export class TodayBarComponent extends BaseNoteComponentImpl implements OnInit {
     super.redirect(`tags`, tag);
   }
 
-  private rebaseArray = (idx: number): void => {
+  protected rebaseArray = (idx: number): void => {
 
     let newArr: Array<string> = [];
     const size = this.note.tags.length;
@@ -91,12 +94,12 @@ export class TodayBarComponent extends BaseNoteComponentImpl implements OnInit {
     this.iterator--;
   }
 
-  private isTagInArray = (tag: string): boolean => {
+  protected isTagInArray = (tag: string): boolean => {
     let numberOfDuplicates = this.note.tags.filter(t => t === tag).length;
     return numberOfDuplicates > 0;
   }
 
-  private resetNote = () => {
+  protected resetNote = () => {
     this.note = new Note();
     this.iterator = 0;
     this.note.actualFor = new Date().toISOString().slice(0, 10);

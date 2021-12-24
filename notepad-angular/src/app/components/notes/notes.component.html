@@ -1,3 +1,92 @@
-<div *ngFor="let note of notes">
-  <p>{{note | json}}</p>
+<div class="container col-md-6 offset-md-3 p-3">
+  <h4 class="mb-5 px-4">{{ date | date:'fullDate'}}</h4>
+  <div *ngIf="notes.length != 0; else noNotes">
+    <div class="note-card" *ngFor="let note of notes">
+      <div class="row">
+        <div class="col mr-5">
+          <p class="text-left" ngbPopover="{{ note.addedAt }}" popoverTitle="Created">
+            <fa-icon [icon]="noteIcon"></fa-icon>
+            {{ note.description }}
+          </p>
+        </div>
+        <div class="col ml-5 text-right">
+          <div class="icon-panel">
+            <a (click)="deleteNoteById(note.id)">
+              <fa-icon [icon]="deleteIcon"></fa-icon>
+            </a>
+          </div>
+        </div>
+      </div>
+      <ul>
+        <li>
+          <div>
+              <span class="tags" *ngFor="let tag of note.tags">
+                <small>
+                  <a routerLink="#" (click)="redirect(tag)">
+                    <fa-icon [icon]="tagIcon"></fa-icon>
+                    {{ tag }}
+                  </a>
+                </small>
+              </span>
+            <span class="reminder">
+                <fa-icon [style.color]="note.reminder? 'red' : 'gray'" [icon]="alarmClockIcon"></fa-icon>
+              </span>
+          </div>
+        </li>
+      </ul>
+      <hr [style.margin-top]="this.note.tags.length === 0? '40px': '0px'">
+    </div>
+  </div>
+  <div *ngIf="dateGreaterOrEqualsThatToday()">
+    <div class="add-section" *ngIf="!isCreatePanelOpen; else submitForm">
+      <a (click)="isCreatePanelOpen = !isCreatePanelOpen">
+        <fa-icon [icon]="addIcon"></fa-icon>
+        Create a new note</a>
+    </div>
+  </div>
 </div>
+
+<ng-template #submitForm>
+  <div class="submit-form">
+    <form (submit)="saveNote()">
+      <div class="form-group">
+        <textarea [(ngModel)]="note.description" name="description" [value]="note.description" type="text"
+                  class="form-control" id="exampleInputDescription" aria-describedby="descriptionHelper"
+                  placeholder="Enter description, i.e. buy some bread"></textarea>
+      </div>
+      <div id="reminder-field" class="form-group">
+        <label for="reminder">Remind me</label>
+        <input [(ngModel)]="note.reminder" [value]="note.reminder" name="reminder" type="checkbox" id="reminder">
+      </div>
+      <div class="form-group">
+        <input [(ngModel)]="tag" [value]="note.tags[iterator]" type="text" class="form-control" name="tag" id="tags"
+               aria-describedby="tagsHelper" placeholder="Tag">
+        <a (click)="addTag()">
+          <fa-icon [icon]="addIcon"></fa-icon>
+        </a>
+      </div>
+      <div class="tags-section" *ngFor="let tag of note.tags">
+        <a (click)="deleteTag(tag)"><small>{{ tag }}</small></a>
+      </div>
+      <div class="btn-group-sm pl-1">
+        <div class="col">
+          <button type="submit" class="btn btn-danger mx-2 text-center" [disabled]="this.note.description === ''">Add
+            note
+          </button>
+          <button type="button" class="btn btn-info text-center" (click)="isCreatePanelOpen = !isCreatePanelOpen">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+
+<ng-template #noNotes>
+  <div class="px-5 text-center">
+    <h5 style="color: gray">There is no notes for today yet</h5>
+    <fa-icon style="font-size: 100px; margin: 10px 10px; padding: 0px" [icon]="emptyIcon"></fa-icon>
+  </div>
+  <hr>
+</ng-template>

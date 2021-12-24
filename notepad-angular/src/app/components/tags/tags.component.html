@@ -1,7 +1,8 @@
 <div class="container col-md-6 offset-md-3 p-3">
   <h4 class="mb-5 px-4">Results by tag: <i>{{ tag }}</i></h4>
   <div *ngIf="notes.length != 0; else noNotes">
-    <div class="note-card" *ngFor="let note of notes" [class]="checkActivityOfActualDate(note.actualFor)? 'green' : 'red'">
+    <div class="note-card" *ngFor="let note of notes"
+         [class]="checkActivityOfActualDate(note.actualFor)? 'green' : 'red'">
       <div class="row">
         <div class="col mr-5">
           <p class="text-left">
@@ -23,7 +24,7 @@
               <span class="tags" *ngFor="let tag of note.tags">
                 <small>
                     <fa-icon [icon]="tagIcon"></fa-icon>
-                    {{ tag }}
+                  {{ tag }}
                 </small>
               </span>
             <span class="reminder">

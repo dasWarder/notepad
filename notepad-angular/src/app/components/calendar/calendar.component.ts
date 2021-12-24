@@ -54,6 +54,7 @@ export class CalendarComponent implements OnInit, RedirectInterface {
   redirect = (path: string, param?: Date): void => {
 
     if (param != undefined) {
+
       let year = param.toLocaleString('en-us', { year: 'numeric' });
       let month = param.toLocaleString('en-us', { month: '2-digit' });
       let day = param.toLocaleString('en-us', { day: '2-digit' });

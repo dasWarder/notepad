@@ -4,7 +4,7 @@
     <div class="note-card" *ngFor="let note of notes">
       <div class="row">
         <div class="col mr-5">
-          <p class="text-left">
+          <p class="text-left" ngbPopover="{{ note.addedAt }}" popoverTitle="Created">
             <fa-icon [icon]="noteIcon"></fa-icon>
             {{ note.description }}
           </p>
