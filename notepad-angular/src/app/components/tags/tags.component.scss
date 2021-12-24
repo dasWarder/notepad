@@ -69,14 +69,22 @@ p {
 }
 
 .red {
-  background-color: rgba(250, 50, 50, 0.2);
+  background-color: rgba(250, 50, 50, 0.1);
   border-radius: 20px;
   padding-top: 10px;
 }
 
+.red:hover {
+  background-color: rgba(250, 50, 50, 0.2);
+}
+
 .green {
-  background-color: rgba(50, 250, 50, 0.2);
+  background-color: rgba(50, 250, 50, 0.1);
   border-radius: 20px;
   padding-top: 10px;
+}
+
+.green:hover {
+  background-color: rgba(50, 250, 50, 0.2);
 }
 

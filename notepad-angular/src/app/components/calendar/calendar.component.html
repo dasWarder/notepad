@@ -1,0 +1,22 @@
+<div class="container col-md-11 offset-md-3 p-3">
+  <h4 class="mb-5 px-4">Calendar</h4>
+  <div>
+    <form>
+      <fieldset>
+        <div>
+          <select class="custom-select col-md-3 offset-md-0 mx-3">
+            <option *ngFor="let month of year; let i = index" (click)="setMonthIndex(i)">{{ month.name }} {{ month.days[0].getFullYear()}}</option>
+          </select>
+        </div>
+      </fieldset>
+    </form>
+    <div class="my-4 col-md-7 align-middle">
+      <div class="month-section" *ngFor="let day of year[monthIndex].days; let i = index">
+          <p>{{day.toLocaleString('en-us', { weekday: 'long' })}}</p>
+          <h4>{{day.getDate()}}</h4>
+      </div>
+    </div>
+  </div>
+<!--  <ngb-pagination [collectionSize]="70" [(page)]="page" [boundaryLinks]="true">-->
+<!--  </ngb-pagination>-->
+</div>

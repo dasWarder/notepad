@@ -1,5 +1,5 @@
 <div class="container col-md-6 offset-md-3 p-3">
-  <h2 class="my-2 text-center">Search for by tag: <i>{{ tag }}</i></h2>
+  <h4 class="mb-5 px-4">Results by tag: <i>{{ tag }}</i></h4>
   <div *ngIf="notes.length != 0; else noNotes">
     <div class="note-card" *ngFor="let note of notes" [class]="checkActivityOfActualDate(note.actualFor)? 'green' : 'red'">
       <div class="row">

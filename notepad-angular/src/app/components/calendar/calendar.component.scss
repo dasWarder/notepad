@@ -1,0 +1,13 @@
+.month-section {
+  display: inline-block;
+  width: 13%;
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+  background-color: rgba(100, 150, 150, 0.2);
+}
+
+.month-section:hover {
+  background-color: rgba(100, 100, 100, 0.5);
+  color: white;
+}
