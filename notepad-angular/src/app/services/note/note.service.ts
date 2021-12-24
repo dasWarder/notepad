@@ -34,6 +34,12 @@ export class NoteService {
     });
   }
 
+  getNotesByDate(date: string) {
+    return this.httpClient.get<Array<Note>>(this.baseUrl, {
+      params: { 'date': date }
+    });
+  }
+
   updateNoteById(id: number, note: Note) {
     return this.httpClient.put(`${this.baseUrl}/${id}`, note);
   }

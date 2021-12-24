@@ -1,9 +1,9 @@
-export interface BaseNoteComponentInterface {
+import {RedirectInterface} from "./redirectInterface";
+
+export interface BaseNoteComponentInterface extends RedirectInterface {
 
   deleteNoteById(id: number) : void;
 
   getNotes(): void;
-
-  redirect(path:string, param?: string): void;
 
 }

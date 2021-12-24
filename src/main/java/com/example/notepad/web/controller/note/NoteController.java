@@ -69,10 +69,11 @@ public class NoteController {
   @GetMapping
   public ResponseEntity<List<NoteResponse>> getNotes(
       @RequestParam(value = "actualFor", required = false) String actualFor,
-      @RequestParam(value = "tag", required = false) String tagName) {
+      @RequestParam(value = "tag", required = false) String tagName,
+      @RequestParam(value = "date", required = false) String date) {
 
     List<NoteResponse> response =
-        noteService.getNotes(actualFor, tagName).stream()
+        noteService.getNotes(actualFor, tagName, date).stream()
             .map(noteMapper::noteToNoteResponse)
             .collect(Collectors.toList());
 

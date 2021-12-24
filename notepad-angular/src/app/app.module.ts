@@ -13,6 +13,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
 import { TagsComponent } from './components/tags/tags.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { NotesComponent } from './components/notes/notes.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CalendarComponent } from './components/calendar/calendar.component';
     MainPageComponent,
     TodayBarComponent,
     TagsComponent,
-    CalendarComponent
+    CalendarComponent,
+    NotesComponent
   ],
   imports: [
     BrowserModule,

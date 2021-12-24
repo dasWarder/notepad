@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -75,26 +76,31 @@ public class NoteServiceImpl implements NoteService {
   }
 
   @Override
-  public List<Note> getNotes(String actualFor, String tagName) {
+  public List<Note> getNotes(String actualFor, String tagName, String date) {
 
     if (Objects.nonNull(actualFor)) {
 
       log.info("In NoteServiceImpl.getNotes - Get notes by actual for = {}", actualFor);
-
       LocalDate parsedDate = LocalDate.parse(actualFor);
-      return noteRepository.getNotesByActualFor(parsedDate.atStartOfDay()).stream()
-          .collect(Collectors.toList());
+
+      return noteRepository.getNotesByActualFor(parsedDate.atStartOfDay());
     }
 
     if (Objects.nonNull(tagName)) {
 
       log.info("In NoteServiceImpl.getNotes - Get notes by tag = {}", tagName);
-      return this.getNotesByTag(tagName).stream().collect(Collectors.toList());
+      return this.getNotesByTag(tagName);
+    }
+
+    if (Objects.nonNull(date)) {
+
+      log.info("In NoteServiceImpl.getNotes - Get notes by date = {}", date);
+      return this.getNotesByDate(date);
     }
 
     log.info("In NoteServiceImpl.getNotes - Get notes");
 
-    return noteRepository.findAll().stream().collect(Collectors.toList());
+    return noteRepository.findAll();
   }
 
   @Override
@@ -105,6 +111,13 @@ public class NoteServiceImpl implements NoteService {
     return noteRepository.findAll().stream()
         .filter(n -> DateTimeUtil.noteDateDueToday(n.getActualFor()))
         .collect(Collectors.toList());
+  }
+
+  private List<Note> getNotesByDate(String date) {
+
+    LocalDateTime localDate = LocalDate.parse(date).atStartOfDay().plusDays(1L);
+
+    return noteRepository.getNotesByActualForEquals(localDate);
   }
 
   private List<Note> getNotesByTag(String tagName) {

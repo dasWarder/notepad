@@ -4,21 +4,20 @@ import com.example.notepad.model.Note;
 import com.example.notepad.service.exception.NoteNotFoundException;
 
 import java.util.List;
-import java.util.Set;
 
 public interface NoteService {
 
-    Note saveNote(Note note);
+  Note saveNote(Note note);
 
-    Note updateNote(Long id, Note note) throws NoteNotFoundException;
+  Note updateNote(Long id, Note note) throws NoteNotFoundException;
 
-    Note getNoteById(Long id) throws NoteNotFoundException;
+  Note getNoteById(Long id) throws NoteNotFoundException;
 
-    void deleteNoteById(Long id);
+  void deleteNoteById(Long id);
 
-    List<Note> getReminderNotes();
+  List<Note> getReminderNotes();
 
-    List<Note> getNotes(String actualFor, String tagName);
+  List<Note> getNotes(String actualFor, String tagName, String date);
 
-    List<Note> getTodayNotes();
+  List<Note> getTodayNotes();
 }

@@ -13,6 +13,8 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
 
   List<Note> getNotesByActualFor(LocalDateTime actualFor);
 
+  List<Note> getNotesByActualForEquals(LocalDateTime dateTime);
+
   List<Note> getNotesByReminder(boolean reminder);
 
   List<Note> getNotesByTagsContains(Tag tag);
