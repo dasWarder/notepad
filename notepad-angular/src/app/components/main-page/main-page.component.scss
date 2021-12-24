@@ -1,0 +1,24 @@
+.main-description {
+  margin: 20px;
+
+  h2 {
+    text-align: center;
+    font-size: 100px;
+  }
+
+  button {
+    background-color: #cc5500;
+    width: 30%;
+    margin: 40px 35%;
+    padding: 20px;
+    text-align: center;
+    border-radius: 20px;
+    border: 1px solid rgba(100, 100, 100, 0.3);
+    font-size: 30px;
+    color: white;
+  }
+
+  button:hover {
+    background-color: rgba(250, 0, 0, 0.9);
+  }
+}
