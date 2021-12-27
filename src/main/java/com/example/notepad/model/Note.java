@@ -40,4 +40,8 @@ public class Note {
       joinColumns = {@JoinColumn(name = "note_id")},
       inverseJoinColumns = {@JoinColumn(name = "tag_id")})
   private Set<Tag> tags;
+
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "customer_id")
+  private Customer customer;
 }

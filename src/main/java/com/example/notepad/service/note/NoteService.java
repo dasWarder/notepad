@@ -20,4 +20,5 @@ public interface NoteService {
   List<Note> getNotes(String actualFor, String tagName, String date);
 
   List<Note> getTodayNotes();
+
 }

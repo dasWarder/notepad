@@ -7,12 +7,18 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
 		 http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.3.xsd">
 
-    <include file="classpath:/db/changelog/v1/create_note_table_1.sql"/>
-    <include file="classpath:/db/changelog/v1/create_tag_table_2.sql"/>
-    <include file="classpath:/db/changelog/v1/create_note_tag_table_3.sql"/>
-    <include file="classpath:/db/changelog/v1/populate_note_table_4.sql"/>
-    <include file="classpath:/db/changelog/v1/populate_tag_table_5.sql"/>
-    <include file="classpath:/db/changelog/v1/populate_note_tag_table_6.sql"/>
+    <include file="classpath:/db/changelog/v1/create_role_table.sql"/>
+    <include file="classpath:/db/changelog/v1/create_customer_table.sql"/>
+    <include file="classpath:/db/changelog/v1/create_role_customer_table.sql"/>
+    <include file="classpath:/db/changelog/v1/populate_role_table.sql"/>
+    <include file="classpath:/db/changelog/v1/populate_customer_table.sql"/>
+    <include file="classpath:/db/changelog/v1/populate_role_customer_table.sql"/>
+    <include file="classpath:/db/changelog/v1/create_note_table.sql"/>
+    <include file="classpath:/db/changelog/v1/create_tag_table.sql"/>
+    <include file="classpath:/db/changelog/v1/create_note_tag_table.sql"/>
+    <include file="classpath:/db/changelog/v1/populate_note_table.sql"/>
+    <include file="classpath:/db/changelog/v1/populate_tag_table.sql"/>
+    <include file="classpath:/db/changelog/v1/populate_note_tag_table.sql"/>
 
 </databaseChangeLog>
 

@@ -8,5 +8,7 @@ CREATE TABLE note(
     description VARCHAR NOT NULL,
     added_at TIMESTAMP NOT NULL,
     actual_for TIMESTAMP NOT NULL,
-    reminder BOOLEAN DEFAULT FALSE
+    reminder BOOLEAN DEFAULT FALSE,
+    customer_id BIGINT NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES customer(id)
 );
